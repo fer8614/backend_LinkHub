@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Fullstack Project",
   "main": "index.js",
-  "start": "node dist/index.js",
   "scripts": {
     "dev": "nodemon src/index.ts",
     "build": "tsc",
+    "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Fernando Cepeda",
