@@ -1,7 +1,10 @@
 import express from "express";
 import router from "./router";
+import { connectDB } from "./config/db";
 
 const app = express();
+
+connectDB();
 
 //Read data from request body
 app.use(express.json());
