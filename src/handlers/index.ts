@@ -5,13 +5,6 @@ import User from "../models/User";
 import { checkPassword, hashpassword } from "../utils/auth";
 
 export const createAccount = async (req: Request, res: Response) => {
-  // Handling errors
-  let errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    res.status(400).json({ errors: errors.array() });
-    return;
-  }
-
   const { email, password } = req.body;
   const userExist = await User.findOne({ email });
   if (userExist) {
@@ -37,14 +30,7 @@ export const createAccount = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
-  // Handling errors
-  let errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    res.status(400).json({ errors: errors.array() });
-    return;
-  }
-
-  //Ceheck user register
+  //Check user register
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
