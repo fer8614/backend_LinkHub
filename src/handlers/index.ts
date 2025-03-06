@@ -2,10 +2,10 @@ import type { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import slug from "slug";
 import User from "../models/User";
-import { hashpassword } from "../utils/auth";
+import { checkPassword, hashpassword } from "../utils/auth";
 
 export const createAccount = async (req: Request, res: Response) => {
-  // Manage errors
+  // Handling errors
   let errors = validationResult(req);
   if (!errors.isEmpty()) {
     res.status(400).json({ errors: errors.array() });
@@ -34,4 +34,38 @@ export const createAccount = async (req: Request, res: Response) => {
 
   await user.save();
   res.status(201).send("User registered successfully");
+};
+
+export const login = async (req: Request, res: Response) => {
+  // Handling errors
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(400).json({ errors: errors.array() });
+    return;
+  }
+
+  //Ceheck user register
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    const error = new Error("User not found");
+    res.status(404).json({ error: error.message });
+    return;
+  }
+
+  // Check password
+  const isPasswordValid = await checkPassword(password, user.password);
+  if (!isPasswordValid) {
+    const error = new Error("Invalid password");
+    res.status(401).json({ error: error.message });
+    return;
+  }
+
+  res.send("User logged in successfully");
+
+  // Generate token
+  // const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!);
+
+  // Send token
+  // res.status(200).json({ token });
 };

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { body } from "express-validator";
-import { createAccount } from "./handlers";
+import { createAccount, login } from "./handlers";
 
 const router = Router();
 
@@ -14,6 +14,14 @@ router.post(
     .isLength({ min: 8 })
     .withMessage("The password must be at least 8 characters long"),
   createAccount,
+);
+
+// Auth and Login
+router.post(
+  "/auth/login",
+  body("email").isEmail().withMessage("The email is invalid"),
+  body("password").notEmpty().withMessage("Password is required"),
+  login,
 );
 
 export default router;
