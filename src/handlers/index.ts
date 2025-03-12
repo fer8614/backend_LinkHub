@@ -48,9 +48,9 @@ export const login = async (req: Request, res: Response) => {
     return;
   }
 
-  generateJWT(user);
+  const token = generateJWT({ id: user.id });
 
-  res.send("User logged in successfully");
+  res.send(token);
 
   // Generate token
   // const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!);
