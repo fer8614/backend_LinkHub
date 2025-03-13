@@ -58,3 +58,15 @@ export const login = async (req: Request, res: Response) => {
   // Send token
   // res.status(200).json({ token });
 };
+
+export const getUser = async (req: Request, res: Response) => {
+  const bearer = req.headers.authorization;
+
+  if (bearer === "Bearer" || !bearer) {
+    const error = new Error("Unauthorized");
+    res.status(401).json({ error: error.message });
+    return;
+  }
+
+  console.log(req.headers.authorization);
+};
