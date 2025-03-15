@@ -57,33 +57,5 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const getUser = async (req: Request, res: Response) => {
-  const bearer = req.headers.authorization;
-  const [, token] = bearer.split(" ");
-
-  if (!token) {
-    const error = new Error("Unauthorized");
-    res.status(401).json({ error: error.message });
-    return;
-  }
-
-  if (!bearer) {
-    const error = new Error("Unauthorized");
-    res.status(401).json({ error: error.message });
-    return;
-  }
-
-  try {
-    const result = jwt.verify(token, process.env.JWT_SECRET!);
-    if (typeof result === "object" && result.id) {
-      const user = await User.findById(result.id).select("-password");
-      if (!user) {
-        const error = new Error("User not found");
-        res.status(404).json({ error: error.message });
-        return;
-      }
-      res.json(user);
-    }
-  } catch (error) {
-    res.status(500).json({ error: "Invalid token" });
-  }
+  res.json(req.user);
 };
