@@ -16,7 +16,8 @@ export const authenticate = async (
   next: NextFunction,
 ) => {
   const bearer = req.headers.authorization;
-  const [, token] = bearer.split(" ");
+
+  const token = bearer?.split(" ")[1];
 
   if (!token) {
     const error = new Error("Unauthorized");
