@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { body } from "express-validator";
-import { createAccount, getUser, login } from "./handlers";
+import { createAccount, getUser, login, updateProfile } from "./handlers";
 import { handleInputErrors } from "./middleware/validation";
 import { authenticate } from "./middleware/auth";
 
@@ -30,5 +30,13 @@ router.post(
 
 // Get User
 router.get("/user", authenticate, getUser);
+router.patch(
+  "/user",
+  body("handle").notEmpty().withMessage("The handle cannot be empty"),
+  body("description").notEmpty().withMessage("The description cannot be empty"),
+  handleInputErrors,
+  authenticate,
+  updateProfile,
+);
 
 export default router;
