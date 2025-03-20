@@ -1,10 +1,11 @@
 import type { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import slug from "slug";
-import jwt from "jsonwebtoken";
+import formidable from "formidable";
 import User from "../models/User";
 import { checkPassword, hashpassword } from "../utils/auth";
 import { generateJWT } from "../utils/jwt";
+import cloudinary from "../config/cloudinary";
 
 process.loadEnvFile();
 
@@ -78,6 +79,22 @@ export const updateProfile = async (req: Request, res: Response) => {
 
     await req.user.save();
     res.status(200).send("Profile updated successfully");
+  } catch (e) {
+    const error = new Error("Error updating profile");
+    res.status(500).json({ error: error.message });
+    return;
+  }
+};
+
+export const uploadImage = async (req: Request, res: Response) => {
+  const form = formidable({
+    multiples: false,
+  });
+  form.parse(req, (error, fields, files) => {
+    console.log(files.file[0].filepath);
+  });
+
+  try {
   } catch (e) {
     const error = new Error("Error updating profile");
     res.status(500).json({ error: error.message });
