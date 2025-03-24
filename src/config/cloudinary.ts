@@ -1,6 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
 
-// process.loadEnvFile();
 // Configuration
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
