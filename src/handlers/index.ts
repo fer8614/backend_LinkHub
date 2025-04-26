@@ -124,7 +124,7 @@ export const getUserByHandle = async (req: Request, res: Response) => {
     const { handle } = req.params;
     const user = await User.findOne({ handle }).select("-_id -__v -email -password");
     if(!user) {
-      const error = new Error("User not found");
+      const error = new Error("User does not exist");
       res.status(404).json({ error: error.message });
       return;
     }

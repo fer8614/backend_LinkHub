@@ -48,6 +48,6 @@ router.patch(
 
 router.post("/user/image", authenticate, uploadImage);
 
-router.get("/:handle", getUserByHandle);
+router.get("/:handle", getUserByHandle)
 
 export default router;
