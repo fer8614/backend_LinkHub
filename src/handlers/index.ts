@@ -118,3 +118,14 @@ export const uploadImage = async (req: Request, res: Response) => {
     return;
   }
 };
+
+export const getUserByHandle = async (req: Request, res: Response) => {
+  try {
+    const { handle } = req.params;
+    console.log(handle);
+  } catch (e) {
+    const error = new Error("User not found");
+    res.status(404).json({ error: error.message });
+      return;
+  } 
+};
