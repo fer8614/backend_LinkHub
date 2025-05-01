@@ -3,6 +3,16 @@
 ![LinkHub Logo](https://via.placeholder.com/150) <!-- Replace with actual logo URL -->
 
 LinkHub Backend is a RESTful API service built with Node.js, Express and MongoDB, designed to power the LinkHub link management application.
+Discover your personalized digital space! Centralize all your social media accounts in a single link:
+
+- **Custom profile:** Choose your perfect photo and write a description that reflects your essence.
+- **Unlimited links:** Add and organize all your social profiles so your followers can easily find you.
+- **Modern and fast design:** Intuitive interface created with React, React Router, and Vite.
+- **Robust backend:** Server built with Node.js, Express, and a MongoDB database.
+- **Image optimization:** Fast storage and delivery thanks to Cloudinary.
+- **Safe typing:** Developed in TypeScript for more reliable and maintainable code.
+
+Take your online presence to the next level with our complete and scalable solution!
 
 ## 🚀 Key Features
 
