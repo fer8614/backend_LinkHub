@@ -64,7 +64,7 @@ export const getUser = async (req: Request, res: Response) => {
 
 export const updateProfile = async (req: Request, res: Response) => {
   try {
-    const { description, links } = req.body;
+    const { description, links, name } = req.body;
 
     const handle = slug(req.body.handle, "");
     const handleExists = await User.findOne({ handle });
@@ -78,6 +78,7 @@ export const updateProfile = async (req: Request, res: Response) => {
     req.user.description = description;
     req.user.handle = handle;
     req.user.links = links;
+    if (name) req.user.name = name;
 
     await req.user.save();
     res.status(200).send("Profile updated successfully");
